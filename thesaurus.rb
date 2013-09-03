@@ -1,5 +1,7 @@
 class Thesaurus
 
+  attr_accessor :entries
+
   def initialize(entries=[])
     @entries = entries
   end
@@ -11,8 +13,12 @@ end
 
 class Entry
 
-  def initialize(word)
-    @word = word
+  attr_accessor :word, :synonyms, :antonyms
+
+  def initialize(args={})
+    @word = args[:word]
+    @synonyms = args[:synonyms]
+    @antonyms = args[:antonyms]
   end
 
 end
