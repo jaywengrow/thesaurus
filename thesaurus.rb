@@ -15,8 +15,8 @@ class Entry
 
   attr_accessor :word, :synonyms, :antonyms
 
-  def initialize(args={})
-    @word = args[:word]
+  def initialize(word, args={})
+    @word = word
     @synonyms = args[:synonyms]
     @antonyms = args[:antonyms]
   end
@@ -24,12 +24,13 @@ class Entry
 end
 
 # Possible things TODO:
-# 1. Remove entry from Thesaurus
-# 2. Create a clean lookup method(s) that looks up synonyms/antonyms in the thesaurus
+# 1. Add method to Thesaurus to remove entry from Thesaurus
+# 2. Add methods to Entry to add more synonyms/antonyms
+# 3. Create a clean lookup method(s) that looks up synonyms/antonyms in the thesaurus
 #    For example: thesaurus.lookup("happy").synonyms or perhaps just thesaurus.synonyms("happy")
-# 3. When creating new entries, create entries based off the entries with appropriate synonyms
-# 4. Adding and removing synonyms/antonyms from entry
-# 5. Better API for initializing Thesaurus. Possible example:
+# 4. When creating new entries, create entries based off the entries with appropriate synonyms
+# 5. Adding and removing synonyms/antonyms from entry
+# 6. Better API for initializing Thesaurus. Possible example:
 #    t = Thesaurus.new do
 #      Entry.new("happy") do
 #        synonyms ["glad", "content"]
