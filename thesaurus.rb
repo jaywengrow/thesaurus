@@ -26,6 +26,7 @@ end
 # Possible things TODO:
 # 1. Remove entry from Thesaurus
 # 2. Create a clean lookup method(s) that looks up synonyms/antonyms in the thesaurus
+#    For example: thesaurus.lookup("happy").synonyms or perhaps just thesaurus.synonyms("happy")
 # 3. When creating new entries, create entries based off the entries with appropriate synonyms
 # 4. Adding and removing synonyms/antonyms from entry
 # 5. Better API for initializing Thesaurus. Possible example:
