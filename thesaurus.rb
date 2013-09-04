@@ -24,11 +24,11 @@ class Entry
 end
 
 # Possible things TODO:
-# 1. Add method to Thesaurus to remove entry from Thesaurus
-# 2. Add methods to Entry to add more synonyms/antonyms
-# 3. Create a clean lookup method(s) that looks up synonyms/antonyms in the thesaurus.
-# 4. When creating new entries, create entries based off the entries with appropriate synonyms
-# 5. Better API for initializing Thesaurus. Possible example:
+# 1. Add method to Thesaurus that removes entries from the Thesaurus
+# 2. Add methods to Entry that add more synonyms/antonyms to an existing Entry.
+# 3. As of now, the only way to look up synonyms in the thesaurus is thesaurus.entries["happy"].synonyms. Create a cleaner lookup method(s) that looks up synonyms/antonyms in the thesaurus.
+# 4. When creating new entries, create mirror entries based on synonyms. For example, if we add to a thesaurus an Entry for "happy" that has a synonym for "glad", that should automatically create an entry for "glad" that has a synonym "happy".
+# 5. Develop a cleaner API for initializing Thesaurus. Possible example:
 #    t = Thesaurus.new do
 #      Entry.new("happy") do
 #        synonyms ["glad", "content"]
