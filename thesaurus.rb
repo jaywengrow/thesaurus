@@ -8,6 +8,7 @@ class Thesaurus
 
   def <<(entry)
     @entries.merge!({entry.word => entry})
+    create_mirror_entries(entry.word)
   end
 
   def create_mirror_entries(word)
@@ -16,7 +17,6 @@ class Thesaurus
         @entries[synonym].add_synonym(word) if !synonyms(synonym).include?(word)
       else #doesn't exist
         self << Entry.new(synonym, {:synonyms => ([word] + synonyms(word) - [synonym])})
-        # create_mirror_entries(synonym)
       end
     end
   end
@@ -47,11 +47,11 @@ class Entry
 
   def add_synonym(word)
     @synonyms << word
+    @synonyms = @synonyms.uniq
   end
 
-
-
 end
+
 
 # Possible things TODO:
 # 1. Add method to Thesaurus that removes entries from the Thesaurus
