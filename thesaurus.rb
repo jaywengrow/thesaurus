@@ -2,13 +2,21 @@ class Thesaurus
 
   attr_accessor :entries
 
-  def initialize(entries={})
+  def initialize(entries={}, &block)
     @entries = entries
+    if block
+      x = instance_eval(&block)
+    end
   end
 
   def <<(entry)
     @entries.merge!({entry.word => entry})
     create_mirror_entries(entry.word)
+  end
+
+  def entry(word, &block)
+    new_entry = Entry.new(word, &block)
+    self << new_entry
   end
 
   def create_mirror_entries(word)
@@ -37,17 +45,30 @@ end
 
 class Entry
 
-  attr_accessor :word, :synonyms, :antonyms
+  attr_accessor :word#, :synonyms, :antonyms
 
-  def initialize(word, args={})
+  def initialize(word, args={}, &block)
     @word = word
     @synonyms = args[:synonyms] || []
     @antonyms = args[:antonyms] || []
+    instance_eval(&block) if block
   end
 
   def add_synonym(word)
     @synonyms << word
     @synonyms = @synonyms.uniq
+  end
+
+  def add_synonyms(words)
+    words.each { |word| add_synonym(word)}
+  end
+
+  def synonyms(words=nil)
+    if words
+      add_synonyms(words)
+    else
+      @synonyms
+    end
   end
 
 end

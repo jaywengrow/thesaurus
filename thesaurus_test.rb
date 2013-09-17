@@ -55,6 +55,31 @@ class ThesaurusTest < MiniTest::Unit::TestCase
     assert_equal(["gleeful", "happy"], thesaurus.synonyms("glad"))
   end
 
+  def test_easy_add_entry
+    t = Thesaurus.new do
+      entry "happy" do
+        synonyms ["glad", "content"]
+        # antonyms ["sad", "unhappy"]
+      end
+    end
+    assert_equal(3, t.entries.length)
+  end
+
+  def test_easy_add_multiple_entries
+    t = Thesaurus.new do
+      entry "happy" do
+        synonyms ["glad", "content"]
+        # antonyms ["sad", "unhappy"]
+      end
+
+      entry "sad" do
+        synonyms ["unhappy", "mad"]
+        # antonyms ["sad", "unhappy"]
+      end
+    end
+    assert_equal(6, t.entries.length)
+  end
+
 end
 
 class EntryTest < MiniTest::Unit::TestCase
@@ -63,6 +88,20 @@ class EntryTest < MiniTest::Unit::TestCase
     entry = Entry.new("apartments", {:synonyms => ["condominium"]})
     entry.add_synonym("house")
     assert_equal(entry.synonyms.last, "house")
+  end
+
+  def test_easy_add_entry
+    e = Entry.new("happy") do
+      synonyms ["glad", "content"]
+      # antonyms ["sad", "unhappy"]
+    end
+    assert_equal(["glad", "content"], e.synonyms)
+  end
+
+  def test_add_synonyms
+    entry = Entry.new("apartments")
+    entry.add_synonyms(["condos"])
+    assert_equal(["condos"], entry.synonyms)
   end
 
 end
